@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Products;
 use app\models\Reorder;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,22 +39,10 @@ class ProductsController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Products::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'ProductID' => SORT_DESC,
-                ]
-            ],
-            */
-        ]);
+        $model = Products::find()->all();
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 
@@ -105,13 +94,18 @@ class ProductsController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $data = $this->request->post();
             $amount_after_sale = $model->ProductQuantity - (int)$data['Products']['Amount_sold'];
-            $model->ProductQuantity = $amount_after_sale;
-            if ($model->save()) {
-                // code...
-                return $this->redirect(['view', 'ProductID' => $model->ProductID]);
+            if ($amount_after_sale >= 0) {
+                $model->ProductQuantity = $amount_after_sale;
+                if ($model->save()) {
+                    // code...
+                    return $this->redirect(['view', 'ProductID' => $model->ProductID]);
+                }else{
+                    Yii::$app->session->setFlash('message', "Sale failed to commit");
+                }
             }else{
-                Yii::$app->session->setFlash('message', "Sale failed to commit");
+                Yii::$app->session->setFlash('message', "You cannot sell more than the stock");
             }
+            
         }
 
         return $this->render('sale', [

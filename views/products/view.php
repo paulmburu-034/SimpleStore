@@ -36,6 +36,8 @@ $this->title = $model->ProductID;
                                                     'method' => 'post',
                                                 ],
                                             ]) ?></li>
+
+                                        <li style="display:inline;"><?= Html::a('Close', ['index', 'ProductID' => $model->ProductID], ['class' => 'btn btn-primary']) ?></li>
                                     </ul>
                                 </div>
                             </div>

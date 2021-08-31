@@ -2,59 +2,94 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = 'Open Reorders';
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php if (Yii::$app->session->hasFlash('error')): ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <h4><i class="icon fa fa-check"></i>Error!</h4>
+        <?= Yii::$app->session->getFlash('error') ?>
+    </div>
+<?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('success')): ?>
+    <div class="alert alert-success alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <h4><i class="icon fa fa-check"></i>Success!</h4>
+        <?= Yii::$app->session->getFlash('success') ?>
+    </div>
+<?php endif; ?>
 <div class="app-content content">
-    <div class="content-header"></div>
+    <div class="content-header row">
+    </div>
     <div class="content-wrapper">
-        <!-- <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?> -->
-        <?=Yii::$app->controller->renderPartial('//layouts/alert');?>
         <div class="content-body">
             <section class="flexbox-container">
                     <div class="content-body">
-                        <div class="card">
-                            <div class="card-header card--header">
-                                <h4 class="card-title"></h4>
-                                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline list-actions" style="float: right;">
-                                        <li></li>
-                                        <li><?= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-content collapse show">
-                                <div class="card-body card-dashboard">
-                                    <!-- content -->
-                                    <div class="products-index">
-                                        <?= GridView::widget([
-                                            'dataProvider' => $dataProvider,
-                                            'columns' => [
-                                                ['class' => 'yii\grid\SerialColumn'],
+                        <!-- Zero configuration table -->
+                        <section id="configuration">
+                            <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header card--header">
+                                                    <h4></h4>
 
-                                                'ProductID',
-                                                'ProductName',
-                                                'ProductQuantity',
-                                                'ReorderLevel',
+                                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                                    <div class="heading-elements">
+                                                        <ul class="list-inline mb-0">
+                                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                                            <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
+                                                        </ul>
+                                                    </div>
+                                            </div>
+                                            <div style="float: right;">
+                                                <?= Html::a('Create', ['create'], ['class' => 'btn btn-primary']) ?>
+                                            </div>
+                                            <div class="card-content collapse show">
+                                                    <div class="card-body">
+                                                    <table class="table table-striped table-bordered zero-configuration">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Count</th>
+                                                                <th>Product Name</th>
+                                                                <th>Product Quantity</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $i = 0;
 
-                                                ['class' => 'yii\grid\ActionColumn'],
-                                            ],
-                                        ]); ?>
+                                                            foreach ($model as $key => $row) {
+                                                                ++$i;
+                                                                ?>
+                                                                <tr>
+                                                                    <td><?= $i ?></td>
+                                                                    <td><?= $row['ProductName'] ?></td>
+                                                                    <td><?= $row['ProductQuantity'] ?></td>
+                                                                    <td align="center">
+                                                                        <?= Html::a('<i class="ft-eye"></i> Sell', ['sale', 'ProductID' => $row->ProductID], ['class' => '']) ?>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php } ?>
+                                                        </tbody>
+                                                    </table>
+
+
+                                                    </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                        </section>
+                        <!--/ Zero configuration table -->
                     </div>
             </section>
         </div>
     </div>
 </div>
-
-
-
