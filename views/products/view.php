@@ -27,7 +27,7 @@ $this->title = $model->ProductID;
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline list-actions" style="float: right;">
-                                        <li style="display:inline;"><?= Html::a('Sell', ['sale', 'ProductID' => $model->ProductID], ['class' => 'btn btn-success']) ?></li>
+                                        <li style="display:inline;"><?= Html::a('Sell', ['sale', 'ProductID' => $model->ProductID], ['class' => 'btn btn-success']) ?></li><!-- 
                                         <li style="display:inline;"><?= Html::a('Update', ['update', 'ProductID' => $model->ProductID], ['class' => 'btn btn-primary']) ?></li>
                                         <li style="display:inline;"><?= Html::a('Delete', ['delete', 'ProductID' => $model->ProductID], [
                                                 'class' => 'btn btn-danger',
@@ -35,9 +35,9 @@ $this->title = $model->ProductID;
                                                     'confirm' => 'Are you sure you want to delete this item?',
                                                     'method' => 'post',
                                                 ],
-                                            ]) ?></li>
+                                            ]) ?></li> -->
 
-                                        <li style="display:inline;"><?= Html::a('Close', ['index', 'ProductID' => $model->ProductID], ['class' => 'btn btn-primary']) ?></li>
+                                        <li style="display:inline;"><?= Html::a('Close', ['index', 'ProductID' => $model->ProductID], ['class' => 'btn btn-danger']) ?></li>
                                     </ul>
                                 </div>
                             </div>

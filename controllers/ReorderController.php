@@ -53,6 +53,7 @@ class ReorderController extends Controller
             $amount_after_add = $product->ProductQuantity + (int)$data['Reorder']['QuantityAdded'];
             $product->ProductQuantity = $amount_after_add;
             $product->ReorderStatus = 'Released';
+            $product_search->Reordered = 0;
             $model->Status = 'Released';
             if ($model->save() && $product->save()) {
                 // code...

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use app\models\Products;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -66,11 +66,12 @@ $this->title = 'Open Reorders';
 
                                                             foreach ($model as $key => $row) {
                                                                 ++$i;
+                                                                $product = Products::findOne(['ProductID'=>$row['ProductID']]);
                                                                 ?>
                                                                 <tr>
                                                                     <td><?= $i ?></td>
                                                                     <td><?= $row['ReorderID'] ?></td>
-                                                                    <td><?= $row['ProductID'] ?></td>
+                                                                    <td><?= $product->ProductName ?></td>
                                                                     <td><?= $row['Status'] ?></td>
                                                                     <td align="center">
                                                                         <?= Html::a('<i class="ft-eye"></i> Restock', ['restock', 'id' => $row->ReorderID], ['class' => '']) ?>

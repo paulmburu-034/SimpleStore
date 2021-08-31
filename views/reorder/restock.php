@@ -33,7 +33,7 @@ $this->title = 'Update Product Quantity';
                                      <p style="color: red;"><?= Yii::$app->session->getFlash('message'); ?></p>
                                     <div class="products-restocked">
                                         <?php $form = ActiveForm::begin(); ?>
-                                        <?= $form->field($model, 'QuantityAdded')->textInput() ?>
+                                        <?= $form->field($model, 'QuantityAdded')->textInput(['type' => 'number']) ?>
 
                                         <div class="form-group">
                                             <?= Html::submitButton('Update Product Quantity', ['class' => 'btn btn-success']) ?>

@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Open Reorders';
+$this->title = 'Products';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php if (Yii::$app->session->hasFlash('error')): ?>

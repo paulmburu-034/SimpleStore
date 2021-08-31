@@ -38,7 +38,6 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Reorders',  'items' => [
-                    ['label' => 'Proccesing Status', 'url' => '/products/orders'],
                     ['label' => 'Reorders', 'url' => '/reorder'],
                 ],
             ],

@@ -14,9 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ProductName')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ProductQuantity')->textInput() ?>
+    <?= $form->field($model, 'ProductQuantity')->textInput(['type' => 'number']) ?>
 
-    <?= $form->field($model, 'ReorderLevel')->textInput() ?>
+    <?= $form->field($model, 'ReorderLevel')->textInput(['type' => 'number']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
